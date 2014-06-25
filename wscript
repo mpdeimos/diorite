@@ -92,7 +92,7 @@ def options(ctx):
 	ctx.add_option('--debug', action='store_true', default=True, dest='debug', help="Turn on debugging symbols")
 	ctx.add_option('--no-debug', action='store_false', dest='debug', help="Turn off debugging symbols")
 	ctx.add_option('--no-ldconfig', action='store_false', default=True, dest='ldconfig', help="Don't run ldconfig after installation")
-	ctx.add_option('--no-undefined', action='store_false', default=True, dest='noundefined', help="Turn off undefined symbol errors")
+	ctx.add_option('--allow-undefined', action='store_true', default=False, dest='allowundefined', help="Turn off undefined symbol errors")
 	ctx.add_option('--platform', default=_PLATFORM, help="Target platform")
 
 # Configure build process
@@ -135,10 +135,10 @@ def configure(ctx):
 			ctx.env.append_unique('CFLAGS', ['-g', '-gdwarf-2'])
 	
 	# Anti-underlinking and anti-overlinking linker flags.
-	if ctx.options.noundefined:
-		ctx.env.append_unique("LINKFLAGS", ["-Wl,--no-undefined", "-Wl,--as-needed"])
-	else:
+	if ctx.options.allowundefined:
 		ctx.env.append_unique("LINKFLAGS", ["-Wl,--as-needed"])
+	else:
+		ctx.env.append_unique("LINKFLAGS", ["-Wl,--no-undefined", "-Wl,--as-needed"])
 	
 	# Check dependencies
 	ctx.check_dep('glib-2.0', 'GLIB', '2.32')
