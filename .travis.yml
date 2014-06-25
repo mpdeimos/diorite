@@ -7,5 +7,5 @@ install:
 
 script:
   - . setup_env_linux.sh
-  - python2 waf configure
+  - python2 waf configure --no-ldconfig --noopt
   - python2 waf
