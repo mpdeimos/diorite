@@ -137,7 +137,7 @@ def configure(ctx):
 	# Anti-underlinking and anti-overlinking linker flags.
 	if ctx.options.noundefined:
 		ctx.env.append_unique("LINKFLAGS", ["-Wl,--no-undefined", "-Wl,--as-needed"])
-	else
+	else:
 		ctx.env.append_unique("LINKFLAGS", ["-Wl,--as-needed"])
 	
 	# Check dependencies
