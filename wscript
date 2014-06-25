@@ -134,7 +134,7 @@ def configure(ctx):
 			ctx.env.append_unique('CFLAGS', ['-g', '-gdwarf-2'])
 	
 	# Anti-underlinking and anti-overlinking linker flags.
-	ctx.env.append_unique("LINKFLAGS", ["-Wl,--no-undefined", "-Wl,--as-needed"])
+	ctx.env.append_unique("LINKFLAGS", ["-Wl,--as-needed"])
 	
 	# Check dependencies
 	ctx.check_dep('glib-2.0', 'GLIB', '2.32')
