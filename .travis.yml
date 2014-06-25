@@ -1,0 +1,11 @@
+language: c # vala is not supported yet
+
+install:
+  - sudo add-apt-repository ppa:vala-team -y
+  - sudo apt-get update
+  - sudo apt-get install valac 
+
+script:
+  - . setup_env_linux.sh
+  - python2 waf configure
+  - python2 waf
